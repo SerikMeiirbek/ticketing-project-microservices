@@ -1,13 +1,32 @@
 spring:
   application:
-    admin:
-      name: gateway-service
+    name: gateway-service
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/cydeo/dev/user/**
+          filters:
+            - RewritePath=/cydeo/dev/user/(?<segment>.*),/$\{segment}
+        - id: project-service
+          uri: lb://project-service
+          predicates:
+            - Path=/cydeo/dev/project/**
+          filters:
+            - RewritePath=/cydeo/dev/project/(?<segment>.*),/$\{segment}
+        - id: task-service
+          uri: lb://task-service
+          predicates:
+            - Path=/cydeo/dev/task/**
+          filters:
+            - RewritePath=/cydeo/dev/task/(?<segment>.*),/$\{segment}
+
 
 
 server:
@@ -21,6 +40,7 @@ eureka:
     serviceUrl:
       defaultZone: http://discovery-service:8761/eureka/
 
+
 management:
   endpoint:
     health:
@@ -30,6 +50,7 @@ management:
       exposure:
         include: "*"
   context-path: http://localhost:${server.port}/actuator
+
 
 info:
   application:
