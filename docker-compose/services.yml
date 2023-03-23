@@ -86,6 +86,7 @@ services:
       - "8761:8761"
     networks:
       - backend
+
 networks:
   backend:
     driver: bridge
