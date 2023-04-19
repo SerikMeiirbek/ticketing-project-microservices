@@ -16,5 +16,9 @@ spring:
           default-label: master
           username: serikmeiirbek
           password: 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
+      #          password: '{cipher}712e017d3301fd0b7b9882489f52f5824fe623d767e91bde5be75d8fd034f37303e25e37f28e06f6ae6c7f0a18bfd731ba2a5b2efb0f0fd4debe7debf6ca06ff'
       fail-fast: true
+
+#encrypt:
+#  key: serik
 
